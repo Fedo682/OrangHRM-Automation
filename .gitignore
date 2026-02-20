@@ -15,8 +15,9 @@ test-output/
 test-output/**
 
 # Eclipse
-.classpath
-.project
+# Keep .project and .classpath for Eclipse import
+# .classpath
+# .project
 .settings/
 bin/
 
