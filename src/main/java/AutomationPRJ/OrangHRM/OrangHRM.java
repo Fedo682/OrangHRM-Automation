@@ -19,7 +19,7 @@ public class OrangHRM {
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 	}
 	
-	By username = By.xpath("//input[@name='username']");
+	/*By username = By.xpath("//input[@name='username']");
 	By password = By.name("password");
 	By loginButton = By.xpath("//button[@type='submit']");
 	By dashboardHeader = By.xpath("//h6[contains(@class,'oxd-topbar-header-breadcrumb')]");
@@ -34,20 +34,21 @@ public class OrangHRM {
 	By exceedMessage = By.xpath("//span[text()='Should not exceed 30 characters']");
 	By createLoginToggleOff =  By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div[2]/div[2]/div/label/span");
 	By createLoginToggleOn = By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div[2]/div[2]/div/label/span");
-	
+	*/
 	By arrow = By.xpath("//span[@class='oxd-userdropdown-tab']");
 	By logoutButton = By.xpath("//a[text()='Logout']");
-	By pim = By.xpath("//span[text()='PIM']");
+	/*By pim = By.xpath("//span[text()='PIM']");
 	By addEmploy = By.xpath("//a[text()='Add Employee']");
 	By firstName = By.name("firstName");
 	By lastName = By.name("lastName");
 	By cancelButton = By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[2]/button[1]");
-	
-	By userNameAddEmployee = By.xpath("//label[text()='Username']/parent::div/following-sibling::div/input");
+	*/
+	/*By userNameAddEmployee = By.xpath("//label[text()='Username']/parent::div/following-sibling::div/input");
 	By statusEnableRadio = By.xpath("//label[text()='Enabled']");
 	By passwordAddEmployee = By.xpath("(//input[@type='password'])[1]");
 	By confirmPassworAddEmployee = By.xpath("(//input[@type='password'])[2]");
 	By myInfo = By.xpath("//span[text()='My Info']");
+	*/
 	By contactDetailsLink = By.xpath("//a[text()='Contact Details']");
 	By workEmail = By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/div/div[2]/div[1]/form/div[3]/div/div[1]/div/div[2]/input");
 	By homeTelephone = By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/div/div[2]/div[1]/form/div[2]/div/div[1]/div/div[2]/input");
@@ -55,7 +56,7 @@ public class OrangHRM {
 	By contactDetailsSaveButton = By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/div/div[2]/div[1]/form/div[4]/button");
 	By contactDetailsCancelButton = By.xpath("//button[contains(text(),'Cancel')]");
 	
-	public void login(String uName, String pass) {
+	/*public void login(String uName, String pass) {
 		driver.findElement(username).clear();
 		driver.findElement(username).sendKeys(uName);
 		wait.until(ExpectedConditions.attributeToBe(username, "value", uName));
@@ -64,14 +65,14 @@ public class OrangHRM {
 		wait.until(ExpectedConditions.attributeToBe(password, "value", pass));
 		 driver.findElement(loginButton).click();
 		
-	}
-	public String getDashboardHeader() {
+	}*/
+	/*public String getDashboardHeader() {
 	    return wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardHeader)).getText();
-	}
-	public String getInvalidLoginMessage() {
+	}*/
+	/*public String getInvalidLoginMessage() {
 	    return wait.until(ExpectedConditions.visibilityOfElementLocated(invalidLoginMessage)).getText();
-	}
-	public void addEmployee() {
+	}*/
+	/*public void addEmployee() {
 		driver.findElement(pim).click();
 	    wait.until(ExpectedConditions.visibilityOfElementLocated(pimHeader)).getText();
 		driver.findElement(addEmploy).click();
@@ -105,11 +106,11 @@ public class OrangHRM {
 	    idField.sendKeys(Keys.DELETE);
 	    wait.until(ExpectedConditions.attributeToBe(EmployeeID, "value", ""));
 	    idField.sendKeys(employeeIDExist);	
-	}
-	public String getValidationMessage() {
+	}*/
+	/*/public String getValidationMessage() {
 		return driver.findElement(validationMessage).getText();
-	}
-	public void cancelPIMButton() {
+	}*/
+	/*public void cancelPIMButton() {
 		driver.findElement(cancelButton).click();
 	}
 	public String validateEmployeeInfoHeader() {
@@ -142,7 +143,7 @@ public class OrangHRM {
 		 //WebElement checkbox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='checkbox']")));
 
 		    return driver.findElement(createLoginToggleOff).isSelected();
-	}
+	}*/
 
 
 	public void fillCreateLoginDetailsForm(String uName, String pass,String confPass) {

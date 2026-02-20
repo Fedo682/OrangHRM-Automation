@@ -33,9 +33,11 @@ public class TestAddEmployee {
 	WebElement dashboard;
 
 	WebDriver driver;
-
+	AddEmployee addEmployee;
 	OrangHRM oranghrm;
-
+	Login loginpage ;
+	
+	
 	@BeforeTest
 
 	public void setup() {
@@ -45,9 +47,9 @@ public class TestAddEmployee {
 		driver = new ChromeDriver();
 
 		driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
-
+		addEmployee = new AddEmployee(driver);
 		oranghrm = new OrangHRM(driver);
-
+		loginpage = new Login(driver);
 		driver.manage().window().maximize(); 
 
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
@@ -67,15 +69,15 @@ public class TestAddEmployee {
 
 	public void testAdminAddEmployeeWithValidData()  {
 
-	oranghrm.login("Admin","admin123");	
+	loginpage.loginMethod("Admin","admin123");	
 
-	oranghrm.addEmployee();
+	addEmployee.addEmployeePage();
 
-	oranghrm.addEmployeeFields("laith", "faheem");
+	addEmployee.addEmployeeFields("laith", "faheem");
 
-	oranghrm.clickSaveAddEmployee();
+	addEmployee.clickSaveAddEmployee();
 
-	Assert.assertTrue(oranghrm.getSuccessToastMessage().contains("Success"),"Success toast Message not displayed after adding employee");	
+	Assert.assertTrue(addEmployee.getSuccessToastMessage().contains("Success"),"Success toast Message not displayed after adding employee");	
 
     System.out.println("Employee Added successfully!");
 
@@ -85,11 +87,11 @@ public class TestAddEmployee {
 
 	public void testAdminAddEmployeeWithEmptyMandatoryFields()  {
 
-	oranghrm.login("Admin","admin123");	
+	loginpage.loginMethod("Admin","admin123");	
 
-	oranghrm.addEmployee();
-
-	oranghrm.clickSaveAddEmployee();
+	addEmployee.addEmployeePage();
+	implicitWait();
+	addEmployee.clickSaveAddEmployee();
 
 	String errorMessage = driver.findElement(By.xpath("//span[contains(@class,'oxd-input-field-error-message')]")).getText();
 
@@ -103,31 +105,30 @@ public class TestAddEmployee {
 
 	public void testAdminAddEmployeewithPreventExistingID() throws InterruptedException  {
 
-	oranghrm.login("Admin","admin123");	
+	loginpage.loginMethod("Admin","admin123");	
 
-	oranghrm.addEmployee();
+	addEmployee.addEmployeePage();
 
-	oranghrm.addEmployeeFields("laith", "faheem");
+	addEmployee.addEmployeeFields("laith", "faheem");
 
-    String existingID = oranghrm.getEmployeeID();
+    String existingID = addEmployee.getEmployeeID();
 
-    Thread.sleep(5000);
+    implicitWait();
+	addEmployee.clickSaveAddEmployee();
 
-	oranghrm.clickSaveAddEmployee();
-
-	Assert.assertTrue(oranghrm.getSuccessToastMessage().contains("Success"),"Success toast Message not displayed after adding employee");	
+	Assert.assertTrue(addEmployee.getSuccessToastMessage().contains("Success"),"Success toast Message not displayed after adding employee");	
 
 	System.out.println("Employee Added successfully!");
 
-    oranghrm.addEmployee();
+    addEmployee.addEmployeePage();
 
-    oranghrm.addEmployeeFields("ibraheem", "ahmad");
+    addEmployee.addEmployeeFields("ibraheem", "ahmad");
 
-    oranghrm.setEmployeeID(existingID);
+    addEmployee.setEmployeeID(existingID);
+    implicitWait();
+    addEmployee.clickSaveAddEmployee();
 
-    oranghrm.clickSaveAddEmployee();
-
-    Assert.assertTrue(oranghrm.getValidationMessage().toLowerCase().contains("already exists"),"Error message is not displayed for duplicate employee ID");    
+    Assert.assertTrue(loginpage.getValidationMessage().toLowerCase().contains("already exists"),"Error message is not displayed for duplicate employee ID");    
 
 	}
 
@@ -135,15 +136,15 @@ public class TestAddEmployee {
 
 	public void testCancelPIMButton() {
 
-        oranghrm.login("ADMIN" ,"admin123" );
+        loginpage.loginMethod("ADMIN" ,"admin123" );
 
-		oranghrm.addEmployee();
+		addEmployee.addEmployeePage();
 
-		oranghrm.addEmployeeFields("laith", "faheem");
+		addEmployee.addEmployeeFields("laith", "faheem");
 
-		oranghrm.cancelPIMButton();
+		addEmployee.cancelPIMButton();
 
-		Assert.assertEquals(oranghrm.validateEmployeeInfoHeader(), "Employee Information","Employee Information page is not displayed after cancelation of adding employee");
+		Assert.assertEquals(addEmployee.validateEmployeeInfoHeader(), "Employee Information","Employee Information page is not displayed after cancelation of adding employee");
 
 	    System.out.println("operation canceled successfully");
 
@@ -153,13 +154,13 @@ public class TestAddEmployee {
 
 	public void testFirstNameLongerThan30Chars() {
 
-    oranghrm.login("ADMIN" ,"admin123" );
+    loginpage.loginMethod("ADMIN" ,"admin123" );
 
-    oranghrm.addEmployee();
+    addEmployee.addEmployeePage();
 
-    oranghrm.addEmployeeFields("test123456789011121314151617181920", "laith");
+    addEmployee.addEmployeeFields("test123456789011121314151617181920", "laith");
 
-    Assert.assertEquals(oranghrm.validateExceed30CharsMessage(), "Should not exceed 30 characters","Error message is not displayed for exceeding 30 chars for first name");
+    Assert.assertEquals(addEmployee.validateExceed30CharsMessage(), "Should not exceed 30 characters","Error message is not displayed for exceeding 30 chars for first name");
 
     System.out.println("operation canceled successfully");
 
