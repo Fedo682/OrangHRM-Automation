@@ -27,7 +27,7 @@ public class TestAdminJobTitlesPage {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(9));	
 	}
 	
-  @Test 
+  @Test (priority =1 )
   public void TC26_LoginAndOpenJobTitles() {
 	  loginPage.loginMethod("Admin","admin123");
 	  adminJobTitlesPage.jobTabThenTitleClick();
@@ -36,10 +36,32 @@ public class TestAdminJobTitlesPage {
   @Test (priority =2 )
   public void TC27_addNewJob() {
 	  String newJob = "CSE_" + System.currentTimeMillis();
+	  adminJobTitlesPage.clickAddButton();
 	  adminJobTitlesPage.addNewJob(newJob);
 	  adminJobTitlesPage.clickSubmit();
 	  String expectedResult="Job Titles";
 	  Assert.assertEquals(adminJobTitlesPage.goToMainJobTitlePage(), expectedResult);
+	  System.out.println("Job added successfully");
+  }
+  @Test (priority =3 )
+  public void TC28_addExsistJob() {
+	  String existedJobTitle =adminJobTitlesPage.existedJobTitle(); 
+	  adminJobTitlesPage.clickAddButton();
+	  adminJobTitlesPage.addNewJob(existedJobTitle);
+	  adminJobTitlesPage.clickSubmit();
+	  String expectedResult="Already exists";
+	  Assert.assertEquals(adminJobTitlesPage.getAlreadyExistsMessage(), expectedResult);
+	  System.out.println("Duplicate jobs");
+  }
+  @Test (priority =4 )
+  public void TC29_testAddJobWithEmptyJobTitle() {
+	  adminJobTitlesPage.clickCancel();
+	  adminJobTitlesPage.clickAddButton();
+	  adminJobTitlesPage.addNewJob("");
+	  adminJobTitlesPage.clickSubmit();
+	  String expectedResult="Required";
+	  Assert.assertEquals(adminJobTitlesPage.getRequiredMessage(), expectedResult);
+	  System.out.println("Jobs Title Required");
   }
 
   @AfterTest
