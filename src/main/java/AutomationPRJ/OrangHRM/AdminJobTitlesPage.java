@@ -17,18 +17,22 @@ public class AdminJobTitlesPage {
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 	}
 
-	By adminTap = By.xpath("//span[text()='Admin']");
+	By adminTap = By.xpath("//span[normalize-space()='Admin']");
 	By jobTab = By.xpath("//span[contains(text(),'Job')]");
 	By jobTitle = By.xpath("//a[@class='oxd-topbar-body-nav-tab-link' and text()='Job Titles']");
 	By addButton = By.xpath("//button[@class='oxd-button oxd-button--medium oxd-button--secondary']");
 	By jobField = By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[2]/input");
 	By submitButton = By.xpath("//button[@type='submit']");
 	By jobTitleMainPage = By.xpath("//h6[text()='Job Titles']");
-	By existedJobTitleLocator = By.xpath("//div[text()='Account Assistant']");
+	By firstJobTitle = By.xpath("(//div[@role='cell'])[2]");
 	By alreadyExistsMessage = By.xpath("//span[text()='Already exists']");
 	By requiredMessage = By.xpath("//span[text()='Required']");
 	By cancelButton = By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[5]/button[1]");
-
+	By editButton = By.xpath("//button[.//i[contains(@class,'bi-pencil-fill')]][1]");
+	By editJobTitle=By.xpath("//h6[text()='Edit Job Title']");
+	
+	By updateJobTitleFiled=By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[2]/input");
+	By saveEditButton=By.xpath("//button[normalize-space(.)='Save']");
 	public String goToMainJobTitlePage() {
 		WebDriverWait longWait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
@@ -72,8 +76,8 @@ public class AdminJobTitlesPage {
 	}
 
 	public String existedJobTitle() {
-		return wait.until(ExpectedConditions.visibilityOfElementLocated(existedJobTitleLocator)).getText();
-	}
+		WebDriverWait longWait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		return longWait.until(ExpectedConditions.visibilityOfElementLocated(firstJobTitle)).getText();	}
 
 	public String getAlreadyExistsMessage() {
 		return wait.until(ExpectedConditions.visibilityOfElementLocated(alreadyExistsMessage)).getText();
@@ -82,6 +86,37 @@ public class AdminJobTitlesPage {
 
 	public String getRequiredMessage() {
 		return wait.until(ExpectedConditions.visibilityOfElementLocated(requiredMessage)).getText();
+
+	}
+	public void clickEditIcon() {
+	    By firstJobRow = By.xpath("(//div[@role='row'])[2]");
+	    wait.until(ExpectedConditions.visibilityOfElementLocated(firstJobRow));
+
+	   
+
+	    WebElement editBtn = wait.until(ExpectedConditions.elementToBeClickable(editButton));
+	    editBtn.click();
+	}
+	public void editJobTitle(String editJob) {
+
+		WebElement input = wait.until(ExpectedConditions.elementToBeClickable(updateJobTitleFiled));
+		input.click(); // focus
+		input.clear();
+		input.click(); 
+		input.sendKeys(editJob);
+		
+	
+
+	}
+	
+	public String goToEditJobTitlePage() {
+		WebDriverWait longWait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+		return longWait.until(ExpectedConditions.visibilityOfElementLocated(editJobTitle)).getText();
+	}
+
+	public void clcikSaveEditButton() {
+		wait.until(ExpectedConditions.elementToBeClickable(saveEditButton)).click();
 
 	}
 
