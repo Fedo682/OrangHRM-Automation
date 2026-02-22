@@ -4,8 +4,11 @@ import java.time.Duration;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -113,17 +116,20 @@ public class TestAdminJobTitlesPage {
 		Assert.assertEquals(adminJobTitlesPage.goToEditJobTitlePage(), expectedResult);
 		System.out.println("Edit Job Title successfully");
 	}
+	
 
 	@Test(priority = 8)
-	public void TC33_verifyAdmincanCancelEditingAJobTitle() {
-		adminJobTitlesPage.clickEditIcon();
-		adminJobTitlesPage.editJobTitle("new");
-		adminJobTitlesPage.clcikCancelEditButton();
-		String expectedResult = "Job Titles";
-		Assert.assertEquals(adminJobTitlesPage.goToMainJobTitlePage(), expectedResult);
-		System.out.println("Cancel editing the Job Title successfully");
-	}
 
+	public void TC34_verifyJobTitlefieldDoesNotAcceptMoreThan100characters() {
+		String newJob = "x".repeat(101);
+		adminJobTitlesPage.clickAddButton();
+		adminJobTitlesPage.addNewJob(newJob);
+		adminJobTitlesPage.clickSubmit();
+		String expectedResult = "Should not exceed 100 characters";
+		Assert.assertEquals(adminJobTitlesPage.getshouldNotExceed100charactersMessage(), expectedResult);
+	System.out.println("Job title should Not Exceed 100 characters");
+	}
+	
 	@AfterTest
 	public void teardown() {
 		if (driver != null) {

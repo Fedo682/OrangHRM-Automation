@@ -27,6 +27,7 @@ public class AdminJobTitlesPage {
 	By firstJobTitle = By.xpath("(//div[@role='cell'])[2]");
 	By alreadyExistsMessage = By.xpath("//span[text()='Already exists']");
 	By requiredMessage = By.xpath("//span[text()='Required']");
+	By shouldNotExceed100charactersMessage = By.xpath("//span[text()='Should not exceed 100 characters']");
 	By cancelButton = By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[5]/button[1]");
 	By editButton = By.xpath("//button[.//i[contains(@class,'bi-pencil-fill')]][1]");
 	By editJobTitle = By.xpath("//h6[text()='Edit Job Title']");
@@ -35,6 +36,7 @@ public class AdminJobTitlesPage {
 	By saveEditButton = By.xpath("//button[normalize-space(.)='Save']");
 	By cancelEditButton = By.xpath("//button[normalize-space(.)='Cancel']");
 
+	
 	public String goToMainJobTitlePage() {
 		WebDriverWait longWait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
@@ -67,7 +69,7 @@ public class AdminJobTitlesPage {
 
 		WebDriverWait longWait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		longWait.until(ExpectedConditions.or(ExpectedConditions.visibilityOfElementLocated(jobTitleMainPage),
-				ExpectedConditions.visibilityOfElementLocated(alreadyExistsMessage),
+				ExpectedConditions.visibilityOfElementLocated(alreadyExistsMessage),ExpectedConditions.visibilityOfElementLocated(shouldNotExceed100charactersMessage),
 				ExpectedConditions.visibilityOfElementLocated(requiredMessage)));
 
 	}
@@ -91,7 +93,10 @@ public class AdminJobTitlesPage {
 		return wait.until(ExpectedConditions.visibilityOfElementLocated(requiredMessage)).getText();
 
 	}
+	public String getshouldNotExceed100charactersMessage() {
+		return wait.until(ExpectedConditions.visibilityOfElementLocated(shouldNotExceed100charactersMessage)).getText();
 
+	}
 	public void clickEditIcon() {
 		By firstJobRow = By.xpath("(//div[@role='row'])[2]");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(firstJobRow));
@@ -120,11 +125,14 @@ public class AdminJobTitlesPage {
 	}
 
 	public void clcikCancelEditButton() {
-
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-
 		wait.until(ExpectedConditions.elementToBeClickable(cancelEditButton)).click();
 
 	}
+
+
+
+	
+
 
 }
