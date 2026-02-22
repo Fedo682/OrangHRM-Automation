@@ -65,7 +65,9 @@ public class AdminJobTitlesPage {
 
 	}
 	public void clickCancel() {
-		driver.findElement(cancelButton).click();
+		wait.until(ExpectedConditions.elementToBeClickable(cancelButton)).click();
+
+		
 
 	}
 

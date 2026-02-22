@@ -62,8 +62,21 @@ public class TestAdminJobTitlesPage {
 	  String expectedResult="Required";
 	  Assert.assertEquals(adminJobTitlesPage.getRequiredMessage(), expectedResult);
 	  System.out.println("Jobs Title Required");
-  }
+	  adminJobTitlesPage.clickCancel();
 
+  }
+  
+  @Test (priority =5 )
+  public void TC30_verifyAdminCanCancelAddingAJobTitle() {
+	  
+	  adminJobTitlesPage.clickAddButton();
+	  adminJobTitlesPage.addNewJob("QA");
+	  adminJobTitlesPage.clickCancel();
+	  String expectedResult="Job Titles";
+	  Assert.assertEquals(adminJobTitlesPage.goToMainJobTitlePage(), expectedResult);
+	  System.out.println("Job canceled successfully");
+  }
+  
   @AfterTest
   public void teardown() {
       if (driver != null) {
