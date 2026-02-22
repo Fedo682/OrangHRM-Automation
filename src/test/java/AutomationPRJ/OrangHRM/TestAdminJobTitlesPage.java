@@ -4,6 +4,7 @@ import java.time.Duration;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
@@ -32,7 +33,14 @@ public class TestAdminJobTitlesPage {
 	  adminJobTitlesPage.jobTabThenTitleClick();
 	  System.out.println("Login and open job title page");
   }
-  
+  @Test (priority =2 )
+  public void TC27_addNewJob() {
+	  String newJob = "CSE_" + System.currentTimeMillis();
+	  adminJobTitlesPage.addNewJob(newJob);
+	  adminJobTitlesPage.clickSubmit();
+	  String expectedResult="Job Titles";
+	  Assert.assertEquals(adminJobTitlesPage.goToMainJobTitlePage(), expectedResult);
+  }
 
   @AfterTest
   public void teardown() {
