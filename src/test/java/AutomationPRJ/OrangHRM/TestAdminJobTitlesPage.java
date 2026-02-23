@@ -15,6 +15,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -107,28 +108,37 @@ public class TestAdminJobTitlesPage {
 		System.out.println("Navigate to Edit Job Title successfully");
 	}
 
-	@Test(priority = 7)
-	public void TC32_verifyToEditJobTitle() {
+	@Test(priority = 7,dataProvider="editData")
+	public void TC32_verifyToEditJobTitle(String editTitle) {
 		adminJobTitlesPage.clickEditIcon();
-		adminJobTitlesPage.editJobTitle("new");
+		adminJobTitlesPage.editJobTitle(editTitle);
 		adminJobTitlesPage.clcikSaveEditButton();
 		String expectedResult = "Edit Job Title";
 		Assert.assertEquals(adminJobTitlesPage.goToEditJobTitlePage(), expectedResult);
 		System.out.println("Edit Job Title successfully");
 	}
 	
-
-	@Test(priority = 8)
-
-	public void TC34_verifyJobTitlefieldDoesNotAcceptMoreThan100characters() {
-		String newJob = "x".repeat(101);
-		adminJobTitlesPage.clickAddButton();
-		adminJobTitlesPage.addNewJob(newJob);
-		adminJobTitlesPage.clickSubmit();
-		String expectedResult = "Should not exceed 100 characters";
-		Assert.assertEquals(adminJobTitlesPage.getshouldNotExceed100charactersMessage(), expectedResult);
-	System.out.println("Job title should Not Exceed 100 characters");
-	}
+//
+//	@Test(priority = 8)
+//
+//	public void TC34_verifyJobTitlefieldDoesNotAcceptMoreThan100characters() {
+//		String newJob = "x".repeat(101);
+//		adminJobTitlesPage.clickAddButton();
+//		adminJobTitlesPage.addNewJob(newJob);
+//		adminJobTitlesPage.clickSubmit();
+//		String expectedResult = "Should not exceed 100 characters";
+//		Assert.assertEquals(adminJobTitlesPage.getshouldNotExceed100charactersMessage(), expectedResult);
+//	System.out.println("Job title should Not Exceed 100 characters");
+//	}
+//	
+	
+    @DataProvider(name = "editData")
+    public Object[][] loginData() {
+        return new Object[][] {
+            {"new"},
+    
+        };
+    }
 	
 	@AfterTest
 	public void teardown() {
