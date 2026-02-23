@@ -188,7 +188,7 @@ Cloud execution (Selenium Grid / BrowserStack)
 
 👤 Authors Laith Faheem QA LEAD
 
-Ibraheem Ahmad QA ENGINEER
+Ibrahim Ahmed QA ENGINEER
 
 Mariam Abulail Scrum Master
 
