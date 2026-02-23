@@ -15,7 +15,7 @@ public class Login {
 		this.driver = driver;
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 	}
-	By username = By.xpath("//input[@name='username']");
+	By username = By.name("username");
 	By password = By.name("password");
 	By loginButton = By.xpath("//button[@type='submit']");
 	By invalidLoginMessage = By.xpath("//p[contains(@class,'oxd-alert-content-text')]");
