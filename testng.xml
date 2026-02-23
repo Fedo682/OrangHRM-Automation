@@ -2,9 +2,12 @@
 <suite name="OrangHRM Test Suite">
   <test name="OrangHRM Tests">
     <classes>
-      <class name="AutomationPRJ.OrangHRM.TestLoginWorkflow"/>
+      <class name="AutomationPRJ.OrangHRM.OrganizationModuleTest"/>
       <class name="AutomationPRJ.OrangHRM.TestAddEmployee"/>
-      <class name="AutomationPRJ.OrangHRM.OrangHRMTest"/>
+      <class name="AutomationPRJ.OrangHRM.TestAdminJobTitlesPage"/>
+       <class name="AutomationPRJ.OrangHRM.TestLoginWorkflow"/>
+      <class name="AutomationPRJ.OrangHRM.TestUpdateWorkflow"/>
+
     </classes>
   </test>
 </suite>
