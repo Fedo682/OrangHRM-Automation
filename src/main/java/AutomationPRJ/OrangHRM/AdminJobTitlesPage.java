@@ -21,18 +21,18 @@ public class AdminJobTitlesPage {
 	By jobTab = By.xpath("//span[contains(text(),'Job')]");
 	By jobTitle = By.xpath("//a[@class='oxd-topbar-body-nav-tab-link' and text()='Job Titles']");
 	By addButton = By.xpath("//button[@class='oxd-button oxd-button--medium oxd-button--secondary']");
-	By jobField = By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[2]/input");
+	By jobField = By.xpath("(//input[contains(@class,'oxd-input oxd-input--active')])[2]");
 	By submitButton = By.xpath("//button[@type='submit']");
 	By jobTitleMainPage = By.xpath("//h6[text()='Job Titles']");
 	By firstJobTitle = By.xpath("(//div[@role='cell'])[2]");
 	By alreadyExistsMessage = By.xpath("//span[text()='Already exists']");
 	By requiredMessage = By.xpath("//span[text()='Required']");
 	By shouldNotExceed100charactersMessage = By.xpath("//span[text()='Should not exceed 100 characters']");
-	By cancelButton = By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[5]/button[1]");
+	By cancelButton = By.xpath("//button[@class='oxd-button oxd-button--medium oxd-button--ghost']");
 	By editButton = By.xpath("//button[.//i[contains(@class,'bi-pencil-fill')]][1]");
 	By editJobTitle = By.xpath("//h6[text()='Edit Job Title']");
 
-	By updateJobTitleFiled = By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[2]/input");
+	By updateJobTitleFiled = By.xpath("//label[text()='Job Title']/following::input[1]");
 	By saveEditButton = By.xpath("//button[normalize-space(.)='Save']");
 	By cancelEditButton = By.xpath("//button[normalize-space(.)='Cancel']");
 
