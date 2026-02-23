@@ -1,31 +1,16 @@
 package AutomationPRJ.OrangHRM;
  
 import java.time.Duration;
- 
 import org.openqa.selenium.By;
-
 import org.openqa.selenium.WebDriver;
-
 import org.openqa.selenium.WebElement;
-
 import org.openqa.selenium.chrome.ChromeDriver;
-
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import org.testng.Assert;
-
 import org.testng.annotations.AfterMethod;
-
 import org.testng.annotations.AfterTest;
-
 import org.testng.annotations.BeforeMethod;
-
 import org.testng.annotations.BeforeTest;
-
-import org.testng.annotations.Test;
- 
+import org.testng.annotations.Test; 
 import io.github.bonigarcia.wdm.WebDriverManager;
  
 public class TestAddEmployee {
@@ -166,19 +151,19 @@ public class TestAddEmployee {
 
 	}
 
-	//******************************************************************ibrahim & laith are done********************************
  
 	@Test	(priority = 6)
 
 	public void testEnableCreateLoginDetailsToggle() {	
 
-    oranghrm.login("ADMIN" ,"admin123" );
+    loginpage.loginMethod("ADMIN" ,"admin123" );
 
-    oranghrm.addEmployee();
+    addEmployee.addEmployeePage();
 
-    oranghrm.enableCreateLoginDetailsToggle();
 
-    Assert.assertTrue(oranghrm.checkToggle(),"the creat login details toggle is off");
+    addEmployee.enableCreateLoginDetailsToggle();
+
+    Assert.assertTrue(addEmployee.checkToggle(),"the creat login details toggle is off");
 
 	}
 
@@ -186,15 +171,14 @@ public class TestAddEmployee {
 
 	public void testDisableCreateLoginDetailsToggle() {
 
-    oranghrm.login("ADMIN" ,"admin123" );
+	loginpage.loginMethod("ADMIN" ,"admin123" );
 
-    oranghrm.addEmployee();
+    addEmployee.addEmployeePage();
+    addEmployee.enableCreateLoginDetailsToggle();
 
-    oranghrm.enableCreateLoginDetailsToggle();
+    addEmployee.disableCreateLoginDetailsToggle();
 
-    oranghrm.disableCreateLoginDetailsToggle();
-
-    Assert.assertFalse(oranghrm.checkToggle(),"the creat login details toggle is ONN");
+    Assert.assertFalse(addEmployee.checkToggle(),"the creat login details toggle is ONN");
 
 	}
 
@@ -202,29 +186,25 @@ public class TestAddEmployee {
 
 	public void testValidCreateLoginDetailsToggle() {
 
-    oranghrm.login("ADMIN" ,"admin123" );
+		loginpage.loginMethod("ADMIN" ,"admin123" );
+	    addEmployee.addEmployeePage();
 
-    oranghrm.addEmployee();
+	    implicitWait();
+    addEmployee.enableCreateLoginDetailsToggle();
 
-    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(9));
+    implicitWait();
 
-    oranghrm.enableCreateLoginDetailsToggle();
+    addEmployee.addEmployeeFields("Mariam", "Mariam");
 
-    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(9));
-
-    oranghrm.addEmployeeFields("Mariam", "Mariam");
-
-    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(9));
 
     oranghrm.fillCreateLoginDetailsForm("mariam01", "Admin@123", "Admin@123");
 
-    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(9));
+    implicitWait();
 
     oranghrm.ClickSaveButtonAddEmployee();
 
     Assert.assertTrue(true, "Employee added successfully with valid login details");
 
-    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(9));
 
 	}
 
@@ -232,18 +212,14 @@ public class TestAddEmployee {
 
 	public void testEmptyCreateLoginDetailsToggle() {
 
-		oranghrm.login("ADMIN" ,"admin123" );
+		loginpage.loginMethod("ADMIN" ,"admin123" );
 
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(9));
+	    addEmployee.addEmployeePage();
 
-        oranghrm.addEmployee();
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(9));
+        addEmployee.enableCreateLoginDetailsToggle();
 
-        oranghrm.enableCreateLoginDetailsToggle();
-
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(9));
-
+	    implicitWait();
         oranghrm.ClickSaveButtonAddEmployee();
 
         WebElement requieredMsg = driver.findElement(By.xpath("//span[text()='Required']"));
@@ -262,25 +238,19 @@ public class TestAddEmployee {
 
 	public void testMismatchConfirmPassword() {
 
-		oranghrm.login("ADMIN" ,"admin123" );
+		loginpage.loginMethod("ADMIN" ,"admin123" );
 
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(9));
+	    addEmployee.addEmployeePage();
 
-        oranghrm.addEmployee();
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(9));
+        addEmployee.enableCreateLoginDetailsToggle();
 
-        oranghrm.enableCreateLoginDetailsToggle();
+	    implicitWait();
+        addEmployee.addEmployeeFields("Mariam", "Mariam");
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(9));
-
-        oranghrm.addEmployeeFields("Mariam", "Mariam");
-
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(9));
 
         oranghrm.fillCreateLoginDetailsForm("fadii", "1234fadi", "4321Fadi");
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(9));
 
         try {
 
@@ -292,13 +262,11 @@ public class TestAddEmployee {
 
         }
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(9));
-
         WebElement passwordNotMatchMsg = null;
 
         	passwordNotMatchMsg = driver.findElement(By.xpath("//span[@class='oxd-text oxd-text--span oxd-input-field-error-message oxd-input-group__message']"));
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(9));
+    	    implicitWait();
 
         Assert.assertTrue(passwordNotMatchMsg.isDisplayed(), "Password mismatch error message should be displayed");
 
